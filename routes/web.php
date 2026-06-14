@@ -8,6 +8,8 @@ use App\Http\Controllers\ListProdukController;
 //Route::get('/', function () {
     //return view('welcome');
 //});
+Route::get('/listproduk', [ListProdukController::class, 'show']);
+Route::post('/listproduk', [ListProdukController::class, 'simpan'])->name('produk.simpan');
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/contact', [HomeController::class, 'contact']);
@@ -35,5 +37,6 @@ Route::get('/listbarang/{id}/{nama}', function ($id, $nama) {
 
 Route::get('/listbarang/{id}/{nama}', [ListBarangController::class, 'tampilkan']);
 
-
 Route::get('/listproduk', [ListProdukController::class, 'show']);
+
+
