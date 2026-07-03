@@ -15,18 +15,25 @@
                     <th class="py-3 px-4">Nama Produk</th>
                     <th class="py-3 px-4">Deskripsi</th>
                     <th class="py-3 px-4">Harga</th>
+                    <th class="py-3 px-4">Action</th>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($nama as $index => $item)
-                <tr class="border-b hover:bg-gray-50">
-                    <td class="py-2 px-4 text-center">{{ $index + 1 }}</td>
-                    <td class="py-2 px-4">{{ $item }}</td>
-                    <td class="py-2 px-4">{{ $desc[$index] }}</td>
-                    <td class="py-2 px-4">Rp {{ number_format($harga[$index], 0, ',', '.') }}</td>
-                </tr>
-                @endforeach
-            </tbody>
+                </thead>
+                    @foreach ($produk as $index => $item)
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="py-2 px-4 text-center">{{ $index + 1 }}</td>
+                        <td class="py-2 px-4">{{ $item->nama }}</td>
+                        <td class="py-2 px-4">{{ $item->deskripsi }}</td>
+                        <td class="py-2 px-4">{{ $item->harga }}</td>
+                        <td>
+                            <form action="{{ route('produk.delete', $item->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"onclick="return confirm('Are you sure you want to delete {{ $item->nama }}?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
         </table>
     </div>
 
@@ -48,6 +55,7 @@
                     <td></td>
                     <td></td>
                 </tr>
+
             </table>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
